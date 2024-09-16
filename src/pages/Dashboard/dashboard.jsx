@@ -1,24 +1,87 @@
 import { Button } from "@/components/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Input } from "@/components/ui/input"
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 import UserDelete from "@/components/svgs/user-delete.svg"
 import UserEdit from "@/components/svgs/user-edit.svg"
+import Search from "@/components/svgs/search.svg"
+import Plus from "@/components/svgs/plus.svg"
+import { Label } from "@/components/ui/label"
 
 function Dashboard() {
 
   return (
 
     <div className="p-6 max-w-4xl mx-auto space-y-4">
+      <h1 className="text-3xl font-semibold">Clientes</h1>
 
       <div className="flex items-center justify-between">
-        <Button>Novo cliente</Button>
+
+        <form className="flex items-center gap-2">
+          <Input name="name" placeholder="Nome do cliente" className="w-auto"></Input>
+          <Input name="email" placeholder="Email do cliente" className="w-auto"></Input>
+
+          <Button type="submit" variant="link">
+            <img className="mr-2" src={Search} width={15} height={15} loading="lazy" alt="Ícone de Search"/>
+            Filtrar clientes
+          </Button>
+        </form>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>
+              <img className="mr-2" src={Plus} width={18} height={18} loading="lazy" alt="Ícone de Plus"/>
+              Novo cliente
+            </Button>
+          </DialogTrigger>
+
+          <DialogContent>
+              <DialogHeader>
+                <DialogTitle>
+                  Novo cliente
+                </DialogTitle>
+
+                <DialogDescription>
+                  Cadastrar um novo cliente no sistema.
+                </DialogDescription>
+              </DialogHeader>
+
+              <form className="space-y-6">
+                <div className="grid grid-cols-4 items-center text-right gap-3">
+                  <Label htmlFor="name">Nome</Label>
+                  <Input id="name" className="col-span-3"></Input>
+                </div>
+
+                <div className="grid grid-cols-4 items-center text-right gap-3">
+                  <Label htmlFor="email" type="email">Email</Label>
+                  <Input id="email" className="col-span-3"></Input>
+                </div>
+
+                <div className="grid grid-cols-4 items-center text-right gap-3">
+                  <Label htmlFor="age">Idade</Label>
+                  <Input id="age" type="number" className="col-span-3"></Input>
+                </div>
+
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button type="button" variant="ghost">Cancelar</Button>
+                  </DialogClose>
+
+                  <Button type="submit">Salvar</Button>
+                </DialogFooter>
+              </form>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="border rounded-lg p-2">
